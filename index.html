@@ -14,7 +14,36 @@
             <h1>Your Library</h1>
         </div>
     </div>
-    
+
+    <div class="add-btn-container">
+        <button id="add-btn"  type="button">
+            <img src = "assets/images/add_box.svg" alt="add icon"/>  
+        </button>
+    </div>
+    <dialog id="book-dialog">
+        <button id="cancel-btn">
+            <img src = "assets/images/cancel.svg" alt="cancel icon"/> 
+        </button>
+        <form id="dialog-form">        
+            <div id="dialog-input">    
+                <label for="title">Title</label>
+                <input type="text" id="title" required />
+                
+                <label for="author">Author</label>    
+                <input type="text" id="author" required />
+                <div>
+                    <label for="read-book">Read</label>
+                    <input type="radio" id="yes" name="read-book" value="yes">
+                    <label for="yes">Yes</label>
+                    <input type="radio" id="no" name="read-book" value="no">
+                    <label for="no">No</label>
+                </div>
+            </div>
+            <input id="submit-btn" type="submit" value="Submit">
+        </form>
+
+    </dialog>
+
     <footer>
         <p>Copyright © <a href="https://github.com/FelicityBlue" target="_blank">FelicityBlue</a></p>
     </footer>
