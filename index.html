@@ -15,34 +15,51 @@
         </div>
     </div>
 
-    <div class="add-btn-container">
+    <div id="book-container"></div>
+
+    <div class="btn-container">
         <button id="add-btn"  type="button">
             <img src = "assets/images/add_box.svg" alt="add icon"/>  
         </button>
     </div>
-    <dialog id="book-dialog">
-        <button id="cancel-btn">
-            <img src = "assets/images/cancel.svg" alt="cancel icon"/> 
-        </button>
-        <form id="dialog-form">        
-            <div id="dialog-input">    
-                <label for="title">Title</label>
-                <input type="text" id="title" required />
+    <dialog id="book-modal">
+        <div class="btn-container">
+            <button id="cancel-btn">
+                <img src = "assets/images/cancel.svg" alt="cancel icon"/> 
+            </button>
+        </div>
+        <form id="dialog-form" method="dialog">        
+            <div id="dialog-input">   
+
+                <label for="title">Title: <input type="text" id="title" name="title" required /></label>
+                <label for="author">Author: <input type="text" id="author" name="author" required /></label>    
                 
-                <label for="author">Author</label>    
-                <input type="text" id="author" required />
                 <div>
-                    <label for="read-book">Read</label>
-                    <input type="radio" id="yes" name="read-book" value="yes">
-                    <label for="yes">Yes</label>
-                    <input type="radio" id="no" name="read-book" value="no">
-                    <label for="no">No</label>
+                    <label for="read_book">Read: </label>
+                    <label for="yes"><input type="radio" id="yes" name="read_book" value=true> Yes</label>
+                    <label for="no"><input type="radio" id="no" name="read_book" value=false> No</label>
                 </div>
             </div>
             <input id="submit-btn" type="submit" value="Submit">
         </form>
-
     </dialog>
+
+
+    <form>
+        <label for="firstname">First name: </label>
+        <input type="text" name="firstname"  required>
+        <br>
+        <label for="lastname">Last name: </label>
+        <input type="text" name="lastname"  required>
+        <br>
+        <label for="email">email: </label>
+        <input type="email" name="email"  required>
+        <br>
+        <label for="password">password: </label>
+        <input type="password" name="password"  required>
+        <br>
+        <input type="submit" value="Login!">
+    </form>
 
     <footer>
         <p>Copyright © <a href="https://github.com/FelicityBlue" target="_blank">FelicityBlue</a></p>
