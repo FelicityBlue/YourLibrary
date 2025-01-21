@@ -4,3 +4,11 @@ function Book(title, author, read){
     this.read = read;
 }
 
+const myLibrary = [];
+
+function addBookToLibrary(title, author, read) {
+    let book = new Book(title, author, false);
+    myLibrary.push(book); 
+}
+
+
