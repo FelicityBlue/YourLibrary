@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="styles.css">
+
     <script src="script.js" defer></script>
     <title>Your Library</title>
 </head>
@@ -12,6 +13,9 @@
         <div class="logo-container">
             <img src = "assets/images/local_library.svg" alt="Book icon"/>
             <h1>Your Library</h1>
+        </div>
+        <div class="account-container">
+            <button id="sign-in-btn">Sign In</button>
         </div>
     </div>
 
@@ -31,36 +35,49 @@
         <form id="dialog-form" method="dialog">        
             <div id="dialog-input">   
 
-                <label for="title">Title: <input type="text" id="title" name="title" required /></label>
-                <label for="author">Author: <input type="text" id="author" name="author" required /></label>    
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" required />
                 
+                <label for="author">Author</label>    
+                <input type="text" id="author" name="author" required />
+
+                <label for="pages">Pages</label>
+                <input type="number" id="pages" name="pages" />
+                
+                <label for="read_book">Read</label>
                 <div>
-                    <label for="read_book">Read: </label>
-                    <label for="yes"><input type="radio" id="yes" name="read_book" value=true> Yes</label>
-                    <label for="no"><input type="radio" id="no" name="read_book" value=false> No</label>
+                    <label for="yes"><input type="radio" id="yes" name="read_book" value=true>Yes</label>
+                    <label for="no"><input type="radio" id="no" name="read_book" value=false>No</label>
                 </div>
+     
             </div>
-            <input id="submit-btn" type="submit" value="Submit">
+            <input id="submit-btn" type="submit" value="Add">
         </form>
     </dialog>
 
-
-    <form>
-        <label for="firstname">First name: </label>
-        <input type="text" name="firstname"  required>
-        <br>
-        <label for="lastname">Last name: </label>
-        <input type="text" name="lastname"  required>
-        <br>
-        <label for="email">email: </label>
-        <input type="email" name="email"  required>
-        <br>
-        <label for="password">password: </label>
-        <input type="password" name="password"  required>
-        <br>
-        <input type="submit" value="Login!">
-    </form>
-
+    <dialog id="sign-in-modal">
+        <div class="btn-container">
+            <button id="cancel-signin-btn">
+                <img src = "assets/images/cancel.svg" alt="cancel icon"/> 
+            </button>
+        </div>
+        <form id="sign-in-form">
+            <div id="sign-in-input">
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname"  required>
+            
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname"  required>
+            
+                <label for="email">Email</label>
+                <input type="email" name="email"  required>
+            
+                <label for="password">Password: </label>
+                <input type="password" name="password"  required>
+            </div>
+            <input type="submit" value="Login!" id="login-btn">
+        </form>
+    </dialog>
     <footer>
         <p>Copyright © <a href="https://github.com/FelicityBlue" target="_blank">FelicityBlue</a></p>
     </footer>
