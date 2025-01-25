@@ -5,10 +5,18 @@ function Book(title, author, read){
 }
 
 const myLibrary = [];
+const container = document.getElementById("book-container");
+container.innerHTML = '';
 
 function addBookToLibrary(title, author, read) {
     let book = new Book(title, author, read);
     myLibrary.push(book); 
+
+    let newBook = document.createElement("div");
+    newBook.classList.add("book-card");
+    newBook.innerHTML = `Title ${title}<br>Author ${author}<br>Read ${read}<br><img src = "assets/images/kid_star.svg" alt="star icon"/>`
+    container.appendChild(newBook);
+
 }
 
 function addBook(){
@@ -17,10 +25,12 @@ function addBook(){
     const addBookModal = document.querySelector('#book-modal');
     const dialogForm = document.querySelector("#dialog-form")
     addBookButton.addEventListener("click", () => {
+        console.log("Clicked show modal");
         addBookModal.showModal();
     });
     
-    cancelButton.addEventListener("click", () => {
+    cancelButton.addEventListener("click", (e) => {
+        e.preventDefault();
         addBookModal.close();
     });
 
@@ -31,8 +41,29 @@ function addBook(){
 
         addBookToLibrary(formProps.title, formProps.author, formProps.read_book);
     });
+}
 
+function userSignIn(){
+    const signInButton = document.getElementById('sign-in-btn');
+    const loginButton = document.getElementById('login-btn');
+    const signInModal =  document.getElementById('sign-in-modal');
+    const cancelButton = document.getElementById('cancel-signin-btn');
 
+    signInButton.addEventListener("click", () => {
+        signInModal.showModal();
+    });
+    cancelButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        signInModal.close();
+    });
+    loginButton.addEventListener("click", () => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const formProps = Object.fromEntries(formData);
+
+        console.log(formProps);
+    });
 }
 
 addBook();
+userSignIn();
