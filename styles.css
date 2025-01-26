@@ -1,27 +1,38 @@
 body{
     margin: 0;
+    background-color: #F4F1F8;
 }
 .logo-container, .account-container{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-#book-container{
-    display: flex;
-    flex-wrap:wrap;
-    margin: 1rem 0rem;
-    align-items: flex-start;
+.read-container{
+    padding: 1rem 2.5rem;
+    justify-content: center;
+    align-items: center;
 }
-.book-card{
-    margin-left: 1.5rem;
-    background-color: #e2d4ca;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
-    padding: 3rem 1.5rem;
+.toggle-read{
+    padding: 1rem 2.75rem;
+    border: none;
     border-radius: 0.5rem;
-    color:#a46e42;
 }
+.had-read{
+    background-color: #E3FCE9;
+}
+.hasnt-read{
+    background-color: #FCE9E3;
+}
+#book-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 1rem; 
+    margin: 1rem 0;
+    justify-content: flex-start;
+}
+
 .header{
-    color: #a46e42;
+    color: rgba(166,144,187,255);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -51,8 +62,8 @@ body{
     height:auto;
 }
 #submit-btn, #login-btn{
-    color: #ff80a0 ;
-    background-color: #fdfdfd;
+    color: rgba(168,151,195,255);
+    background-color: rgba(233,227,252,255);
     padding: 0.75rem 2rem;
     border-radius: 0.5rem;
 
@@ -61,7 +72,7 @@ body{
 }
 #sign-in-btn{
     color:#fdfdfd ;
-    background-color: #ff80a0 ;
+    background-color: rgba(166,144,187,255) ;
     padding: 0.75rem 2rem;
     border: none;
     border-radius: 0.5rem;
@@ -70,18 +81,55 @@ body{
     cursor: pointer;
 }
 #book-modal, #sign-in-modal{
-    background-color: #ff80a0;
+    background-color: rgba(168,151,195,255);
     border-radius: 0.7rem;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     color: #fdfdfd;
 }
-#dialog-input, #sign-in-input{
+#dialog-input, #sign-in-input, .book-info{
     display: grid;
     grid-template-columns: 30% 70%;
     row-gap: 0.5rem;
     margin: 1rem 2rem 1rem 2rem;
 }
+.book-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0;
+    align-items: flex-start;
+}
+
+.book-info div:first-child {
+    flex: 0 0 30%;
+    white-space: nowrap;
+}
+
+.book-info div:last-child {
+    flex: 1 1 auto;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1.5rem;
+    background-color:rgba(233,227,252,255);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    padding: 2.6rem 1rem;
+    border-radius: 0.5rem;
+    color: rgb(43,32,32);
+
+    width: 12rem;
+    height: 10rem;
+    max-width: 100%;
+    max-height: 100%;
+}
+
 #dialog-input input, #sign-in-input input{
     margin-bottom: 0.75rem;
     padding: 0.35rem 2rem 0.35rem 0.5rem;
