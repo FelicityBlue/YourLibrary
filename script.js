@@ -1,34 +1,96 @@
-function Book(title, author, read){
+function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
+    this.pages = pages;
     this.read = read;
 }
 
 const myLibrary = [];
 const container = document.getElementById("book-container");
-container.innerHTML = '';
 
-function addBookToLibrary(title, author, read) {
-    let book = new Book(title, author, read);
-    myLibrary.push(book); 
+function renderBooks() {
+    container.innerHTML = "";
 
-    let newBook = document.createElement("div");
-    newBook.classList.add("book-card");
-    newBook.innerHTML = `Title ${title}<br>Author ${author}<br>Read ${read}<br><img src = "assets/images/kid_star.svg" alt="star icon"/>`
-    container.appendChild(newBook);
+    for (const [idx, book] of Object.entries(myLibrary)) {
+        let title = book.title;
+        let author = book.author;
+        let pages = book.pages;
+        let read = book.read;
+        // card
+        let newBook = document.createElement("div");
+        newBook.classList.add("book-card");
+        // container for title info
+        let titleContainer = document.createElement("div");
+        titleContainer.classList.add("book-info");
+        let title_left = document.createElement("div");
+        title_left.innerHTML = `<b>Title</b>`;
+        let title_right = document.createElement("div");
+        title_right.innerHTML = `${title}`;
+        titleContainer.appendChild(title_left);
+        titleContainer.appendChild(title_right);
+        newBook.appendChild(titleContainer);
 
+        // container for author info
+        let authorContainer = document.createElement("div");
+        authorContainer.classList.add("book-info");
+        let author_left = document.createElement("div");
+        author_left.innerHTML = `<b>Author</b>`;
+        let author_right = document.createElement("div");
+        author_right.innerHTML = `${author}`;
+        authorContainer.appendChild(author_left);
+        authorContainer.appendChild(author_right);
+        newBook.appendChild(authorContainer);
+
+        // container for pages info
+        let pagesContainer = document.createElement("div");
+        pagesContainer.classList.add("book-info");
+        let pages_left = document.createElement("div");
+        pages_left.innerHTML = `<b>Pages</b>`;
+        let pages_right = document.createElement("div");
+        pages_right.innerHTML = `${pages}`;
+        pagesContainer.appendChild(pages_left);
+        pagesContainer.appendChild(pages_right);
+        newBook.appendChild(pagesContainer);
+
+        // container for read info
+
+        let readContainer = document.createElement("div");
+        let switchBtn = document.createElement("button");
+        readContainer.classList.add("read-container");
+        switchBtn.classList.add("toggle-read");
+
+        if (read === true) {
+            switchBtn.innerHTML = "Read";
+            switchBtn.classList.add("had-read");
+            console.log("Read");
+        } else {
+            switchBtn.innerHTML = "Not Read";
+            switchBtn.classList.add("hasnt-read");
+            console.log("Not Read");
+        }
+        switchBtn.addEventListener("click", () => {
+            console.log("Pressed Switch Button");
+            toggleRead(idx);
+        });
+
+        readContainer.appendChild(switchBtn);
+
+        newBook.appendChild(readContainer);
+
+        container.appendChild(newBook);
+    }
 }
 
-function addBook(){
-    const addBookButton = document.querySelector('#add-btn');
-    const cancelButton = document.querySelector('#cancel-btn');
-    const addBookModal = document.querySelector('#book-modal');
-    const dialogForm = document.querySelector("#dialog-form")
+function addBook() {
+    const addBookButton = document.querySelector("#add-btn");
+    const cancelButton = document.querySelector("#cancel-btn");
+    const addBookModal = document.querySelector("#book-modal");
+    const dialogForm = document.querySelector("#dialog-form");
     addBookButton.addEventListener("click", () => {
         console.log("Clicked show modal");
         addBookModal.showModal();
     });
-    
+
     cancelButton.addEventListener("click", (e) => {
         e.preventDefault();
         addBookModal.close();
@@ -39,15 +101,34 @@ function addBook(){
         const formData = new FormData(e.target);
         const formProps = Object.fromEntries(formData);
 
-        addBookToLibrary(formProps.title, formProps.author, formProps.read_book);
+        // add the submitted book information to the array
+        let book = new Book(
+            formProps.title,
+            formProps.author,
+            formProps.pages,
+            formProps.read_book
+        );
+        myLibrary.push(book);
+        addBookModal.close();
+        renderBooks();
     });
 }
+function toggleRead(idx) {
 
-function userSignIn(){
-    const signInButton = document.getElementById('sign-in-btn');
-    const loginButton = document.getElementById('login-btn');
-    const signInModal =  document.getElementById('sign-in-modal');
-    const cancelButton = document.getElementById('cancel-signin-btn');
+    if (myLibrary[idx].read === true) {
+        myLibrary[idx].read = false
+
+    } else {
+        myLibrary[idx].read = true;
+    }
+    renderBooks();
+}
+
+function userSignIn() {
+    const signInButton = document.getElementById("sign-in-btn");
+    const loginButton = document.getElementById("login-btn");
+    const signInModal = document.getElementById("sign-in-modal");
+    const cancelButton = document.getElementById("cancel-signin-btn");
 
     signInButton.addEventListener("click", () => {
         signInModal.showModal();
@@ -60,10 +141,9 @@ function userSignIn(){
         e.preventDefault();
         const formData = new FormData(e.target);
         const formProps = Object.fromEntries(formData);
-
-        console.log(formProps);
     });
 }
 
 addBook();
 userSignIn();
+renderBooks();
