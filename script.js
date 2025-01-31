@@ -17,8 +17,28 @@ function renderBooks() {
         let pages = book.pages;
         let read = book.read;
         // card
-        let newBook = document.createElement("div");
-        newBook.classList.add("book-card");
+        let currBook = document.createElement("div");
+        currBook.classList.add("book-card");
+        
+        
+        let removeContainer = document.createElement("div");
+        let removeBtn = document.createElement("button");
+        let cancelImg = document.createElement("img");
+        cancelImg.src = "assets/images/cancel.svg";
+        cancelImg.alt = "cancel icon";
+        cancelImg.width = 50;
+        cancelImg.height = 50;
+
+        removeContainer.classList.add("btn-container");
+        removeBtn.classList.add("remove-btn");
+        removeBtn.addEventListener("click", () => {
+            removeBook(idx);
+        });
+
+        removeBtn.appendChild(cancelImg);
+        removeContainer.appendChild(removeBtn);
+        currBook.appendChild(removeContainer);
+
         // container for title info
         let titleContainer = document.createElement("div");
         titleContainer.classList.add("book-info");
@@ -28,7 +48,7 @@ function renderBooks() {
         title_right.innerHTML = `${title}`;
         titleContainer.appendChild(title_left);
         titleContainer.appendChild(title_right);
-        newBook.appendChild(titleContainer);
+        currBook.appendChild(titleContainer);
 
         // container for author info
         let authorContainer = document.createElement("div");
@@ -39,7 +59,7 @@ function renderBooks() {
         author_right.innerHTML = `${author}`;
         authorContainer.appendChild(author_left);
         authorContainer.appendChild(author_right);
-        newBook.appendChild(authorContainer);
+        currBook.appendChild(authorContainer);
 
         // container for pages info
         let pagesContainer = document.createElement("div");
@@ -50,10 +70,9 @@ function renderBooks() {
         pages_right.innerHTML = `${pages}`;
         pagesContainer.appendChild(pages_left);
         pagesContainer.appendChild(pages_right);
-        newBook.appendChild(pagesContainer);
+        currBook.appendChild(pagesContainer);
 
         // container for read info
-
         let readContainer = document.createElement("div");
         let switchBtn = document.createElement("button");
         readContainer.classList.add("read-container");
@@ -62,22 +81,20 @@ function renderBooks() {
         if (read === true) {
             switchBtn.innerHTML = "Read";
             switchBtn.classList.add("had-read");
-            console.log("Read");
+
         } else {
             switchBtn.innerHTML = "Not Read";
             switchBtn.classList.add("hasnt-read");
-            console.log("Not Read");
         }
         switchBtn.addEventListener("click", () => {
-            console.log("Pressed Switch Button");
             toggleRead(idx);
         });
 
         readContainer.appendChild(switchBtn);
 
-        newBook.appendChild(readContainer);
+        currBook.appendChild(readContainer);
 
-        container.appendChild(newBook);
+        container.appendChild(currBook);
     }
 }
 
@@ -86,8 +103,8 @@ function addBook() {
     const cancelButton = document.querySelector("#cancel-btn");
     const addBookModal = document.querySelector("#book-modal");
     const dialogForm = document.querySelector("#dialog-form");
+    
     addBookButton.addEventListener("click", () => {
-        console.log("Clicked show modal");
         addBookModal.showModal();
     });
 
@@ -113,6 +130,28 @@ function addBook() {
         renderBooks();
     });
 }
+
+function removeBook(idx) {
+
+    const removeCheckModal = document.getElementById("confirm-remove-modal");
+    const yesBtn = document.getElementById("cancel-confirm-btn");
+    const noBtn = document.getElementById("cancel-cancel-btn");
+
+    removeCheckModal.showModal();
+
+    yesBtn.addEventListener("click", () => {
+        console.log("Yes");
+        myLibrary.splice(idx, 1); 
+        removeCheckModal.close(); 
+        renderBooks();
+    });
+
+    noBtn.addEventListener("click", (e) => {
+        e.preventDefault(); 
+        removeCheckModal.close();
+    });
+}
+
 function toggleRead(idx) {
 
     if (myLibrary[idx].read === true) {
@@ -144,6 +183,10 @@ function userSignIn() {
     });
 }
 
+//for (let i = 0; i <= 20; i++){
+    let book = new Book("hello", "world", 100, true);
+    myLibrary.push(book);
+//}
 addBook();
 userSignIn();
 renderBooks();
